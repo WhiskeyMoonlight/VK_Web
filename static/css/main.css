@@ -1,0 +1,91 @@
+main > .container {
+    padding: 60px 15px 0;
+}
+
+.question {
+    border: 1px solid grey;
+    margin-top: 30px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.question-image {
+    max-height: 100px;
+}
+
+.question-title {
+    font-size: 25px;
+    font-family: Helvetica, serif;
+    font-weight: bold;
+}
+
+.tags-description {
+    margin-left: 20px;
+}
+
+.tags {
+    max-width: 100px;
+}
+
+.list-group {
+    border: 0 none;
+    margin-left: 12px;
+    max-width: 200px
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.navbar-brand {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.titles {
+    display: inline;
+    font-size: 25pt;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.btn {
+    margin: 5px;
+}
+
+.tags {
+    display: inline-block;
+}
+
+.container_pagination {
+    margin-top: 15px;
+}
+
+.like-container {
+  display: flex;
+  align-items: center;
+}
+
+.dislike-button,
+.like-button {
+  font-size: 24px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 8px;
+}
+
+.like-count {
+  font-size: 18px;
+}
