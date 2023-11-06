@@ -2,6 +2,25 @@ main > .container {
     padding: 60px 15px 0;
 }
 
+.main_question {
+    margin-top: 30px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.main_question_img {
+    max-height: 150px;
+}
+
+.answer {
+
+    border: 1px solid grey;
+    margin-top: 30px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+
 .question {
     border: 1px solid grey;
     margin-top: 30px;

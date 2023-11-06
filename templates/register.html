@@ -39,25 +39,45 @@
     <div class="container" style="padding-top: 20px">
         <div class="row">
             <div class="col-8">
-                <h2>Log In</h2>
-                <h4 style="color: red">Sorry, wrong password!</h4>
-                <form>
+                <h2>Registration</h2>
+                <h4 style="color: red">Sorry, the email address is already registered!</h4>
+                <form style="padding-top: 20px">
+                    <div class="input-group mb-3">
+                        <label for="InputLogin" class="form-label">Login</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">@</span>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Login"
+                                   aria-describedby="basic-addon1" id="InputLogin">
+                        </div>
+                    </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label for="InputEmail" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
+                    <div class="input-group mb-3">
+                        <label for="InputNickname" class="form-label">Username</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Your very cool Username!"
+                                   aria-label="Nickname" aria-describedby="basic-addon1" id="InputNickname">
+                        </div>
+                    </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <label for="InputPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="InputPassword">
                     </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    <div class="mb-3">
+                        <label for="InputPassword" class="form-label">Repeat password</label>
+                        <input type="password" class="form-control" id="InputPassword">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="input-group mb-3">
+                        <label class="form-label" for="inputGroupFile01">Your avatar</label>
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="inputGroupFile01">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Let's go!</button>
                 </form>
-                <a href="">Create new account</a>
             </div>
 
             <div class="col-4">

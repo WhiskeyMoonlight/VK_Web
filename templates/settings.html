@@ -26,9 +26,19 @@
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
-            <div class="text-end" style="margin-right: 115px">
-                <button type="button" class="btn btn-outline-light me-2">Login</button>
-                <button type="button" class="btn btn-warning">Sign-up</button>
+            <div class="dropdown text-start" style="margin-right: 115px">
+                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="../static/img/heisenberg.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                </a>
+                <ul class="dropdown-menu text-small">
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -39,25 +49,43 @@
     <div class="container" style="padding-top: 20px">
         <div class="row">
             <div class="col-8">
-                <h2>Log In</h2>
-                <h4 style="color: red">Sorry, wrong password!</h4>
-                <form>
+                <h2>Settings: Dr. Pepper</h2>
+                <form style="padding-top: 20px">
+                    <div class="input-group mb-3">
+                        <label for="InputLogin" class="form-label">Login</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">@</span>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Login"
+                                   aria-describedby="basic-addon1" id="InputLogin" value="dr_pepper">
+                        </div>
+                    </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label for="InputEmail" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="InputEmail"
+                               aria-describedby="emailHelp" value="dr.pepper@mail.ru">
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    <div class="input-group mb-3">
+                        <label for="InputNickname" class="form-label">Username</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Your very cool Username!"
+                                   aria-label="Nickname" aria-describedby="basic-addon1"
+                                   id="InputNickname" value="Dr. Pepper">
+                        </div>
                     </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    <div class="input-group mb-3">
+                        <label class="form-label" for="inputGroupFile01">Your avatar</label>
+                        <span class="border border-dark" style="margin: 15px">
+                            <img src="../static/img/heisenberg.jpg" class="img-fluid"
+                                 alt="Responsive image" style="max-width: 350px">
+                        </span>
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="inputGroupFile01" value="c:\heisengerg.jpg">
+                        </div>
+
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </form>
-                <a href="">Create new account</a>
             </div>
 
             <div class="col-4">
