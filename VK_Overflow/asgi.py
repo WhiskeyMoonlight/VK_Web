@@ -1,5 +1,5 @@
 """
-ASGI config for hw2_django_project project.
+ASGI config for VK_Overflow project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hw2_django_project.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'VK_Overflow.settings')
 
 application = get_asgi_application()

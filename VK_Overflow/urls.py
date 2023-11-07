@@ -1,5 +1,5 @@
 """
-URL configuration for hw2_django_project project.
+URL configuration for VK_Overflow project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -16,7 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from app import views
 
 urlpatterns = [
+    path('', views.index, name='index'),
+    path('settings/', views.settings, name='settings'),
+    path('question/<int:question_id>', views.question, name='question'),
+    path('hot/', views.hot, name='hot'),
+    path('ask/', views.ask, name='ask'),
+    path('login/', views.login, name='login'),
     path('admin/', admin.site.urls),
 ]

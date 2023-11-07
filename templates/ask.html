@@ -1,115 +1,25 @@
-<!doctype html>
-<html lang="en" class="h-100">
-<head>
-    <title>My Site</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="../static/css/bootstrap.css" rel="stylesheet">
+{% extends 'layouts/base.html' %}
 
-    <script type="text/javascript" src="../static/js/bootstrap.bundle.js"></script>
-    <!-- Custom styles for this template -->
-    <link href="../static/css/main.css" rel="stylesheet">
-</head>
-<body class="d-flex flex-column h-100">
+{% block content %}
 
-<header class="p-3 mb-3 border-bottom">>
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="" style="margin-left: 100px"> VK-Overflow </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" style="" id="navbarCollapse">
-                <form class="d-flex" style="width: auto; min-width: 50%; margin-left: 80px">
-                    <input class="form-control me-2" type="search" placeholder="Type here..." aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-            <div class="dropdown text-start" style="margin-right: 115px">
-                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                   data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="../static/img/heisenberg.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                </a>
-                <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<!-- Begin page content -->
-<main class="flex-shrink-0">
-    <div class="container" style="padding-top: 20px">
-        <div class="row">
-            <div class="col-8">
-                <div class="row title">
-                    <h2>New Question</h2>
-                </div>
-                <div class="mb-3">
-                    <label for="questionTitle" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="questionTitle"
-                           placeholder="Title...">
-                </div>
-                <div class="mb-3">
-                    <label for="questionText" class="form-label">Text</label>
-                    <textarea class="form-control" id="questionText" rows="8" placeholder="Type here..."></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="questionTitle" class="form-label">Tags</label>
-                    <input type="text" class="form-control" id="questionTitle"
-                           placeholder="Tags...">
-                </div>
-
-                <button type="submit" class="btn btn-primary mb-3">Submit</button>
-            </div>
-
-
-            <div class="col-4">
-                <div class="row tags-description">
-                    <h1 style="margin-top: 20px;">Popular tags</h1>
-                    <div class="tags" style="">
-                        <button type="button" class="btn btn-primary">Python</button>
-                        <button type="button" class="btn btn-secondary">Kotlin</button>
-                        <button type="button" class="btn btn-success">Django</button>
-                        <button type="button" class="btn btn-danger">Jojo</button>
-                        <button type="button" class="btn btn-warning">SHAMAN</button>
-                    </div>
-                    <br/>
-                    <h2>Best users</h2>
-                    <ul class="list-group">
-                        <li class="list-group-item"><a href="">Mr. Freeman</a></li>
-                        <li class="list-group-item"><a href="">Gojo Satoru</a></li>
-                        <li class="list-group-item"><a href="">Jotaro Kujo</a></li>
-                        <li class="list-group-item"><a href="">Morgenshtern</a></li>
-                        <li class="list-group-item"><a href="">Saul Goodman</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+    <div class="row title">
+        <h2>New Question</h2>
     </div>
-</main>
-
-<footer class="footer mt-auto py-3 bg-light">
-    <div class="container">
-        <footer class="py-3 my-4">
-            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
-            </ul>
-            <p class="text-center text-body-secondary">&copy; 2023 Dimochka, Inc</p>
-        </footer>
+    <div class="mb-3">
+        <label for="questionTitle" class="form-label">Title</label>
+        <input type="text" class="form-control" id="questionTitle"
+               placeholder="Title...">
     </div>
-</footer>
+    <div class="mb-3">
+        <label for="questionText" class="form-label">Text</label>
+        <textarea class="form-control" id="questionText" rows="8" placeholder="Type here..."></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="questionTitle" class="form-label">Tags</label>
+        <input type="text" class="form-control" id="questionTitle"
+               placeholder="Tags...">
+    </div>
 
-</body>
-</html>
+    <button type="submit" class="btn btn-primary mb-3">Submit</button>
+
+{% endblock %}
