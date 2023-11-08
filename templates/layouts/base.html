@@ -36,6 +36,7 @@
                 <ul class="dropdown-menu text-small">
                     <li><a class="dropdown-item" href="{% url 'settings' %}">Settings</a></li>
                     <li><a class="dropdown-item" href="{% url 'login' %}">Login(???)</a></li>
+                    <li><a class="dropdown-item" href="{% url 'register' %}">Register(???)</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
@@ -62,16 +63,17 @@
             <div class="col-4">
                 <div class="row tags-description">
                     <h1 style="margin-top: 20px;">Popular tags (Try press them, they work)</h1>
-                    <div class="tags" style="">
-                        <button type="button" class="btn btn-primary">Bender</button>
-                        <button type="button" class="btn btn-secondary">Black-Jack</button>
-                        <button type="button" class="btn btn-success">Anime</button>
-                        <button type="button" class="btn btn-danger">Jojo</button>
-                        <button type="button" class="btn btn-warning">SHAMAN</button>
+                    <div class="tags">
+                        <a role="button" class="btn btn-primary" href="{% url 'tag' tag_name='bender' %}">Bender</a>
+                        <a role="button" class="btn btn-secondary"
+                           href="{% url 'tag' tag_name='black-jack' %}">Black-Jack</a>
+                        <a role="button" class="btn btn-success" href="{% url 'tag' tag_name='anime' %}">Anime</a>
+                        <a role="button" class="btn btn-danger" href="{% url 'tag' tag_name='jojo' %}">Jojo</a>
+                        <a role="button" class="btn btn-warning" href="{% url 'tag' tag_name='shaman' %}">SHAMAN</a>
                     </div>
                     <br/>
                     <h2>Best users</h2>
-                    <ul class="list-group">
+                    <ul class="list-group" style="margin-bottom: 10px">
                         <li class="list-group-item"><a href="">Mr. Freeman</a></li>
                         <li class="list-group-item"><a href="">Gojo Satoru</a></li>
                         <li class="list-group-item"><a href="">Jotaro Kujo</a></li>

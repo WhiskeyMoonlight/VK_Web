@@ -1,0 +1,38 @@
+{% load static %}
+
+<div class="row">
+    <div class="col-3"> <!-- аватарка и лайки -->
+        <div class="row-9">
+            <img src="{% static '/img/heisenberg.jpg' %}" class="img-fluid" alt="Responsive image">
+            <a href="">user {{ question.id }}</a>
+        </div>
+        <div class="row-3">
+            <div class="like-container">
+                <button class="like-button">+</button>
+                <span class="like-count">5</span>
+                <button class="dislike-button">-</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-9"> <!-- вопрос -->
+        <div class="row-10">
+            <div class="question-title"> {{ question.title }} </div>
+            <div class="question-text">Lorem Ipsum is simply dummy text of the printing
+                and typesetting industry. Lorem Ipsum has been the industry's standard
+                dummy text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book. It has survived
+                not only five centuries, but also the leap into electronic typesetting,
+                remaining essentially unchanged.
+            </div>
+        </div>
+
+        <div class="row-2" style="margin-top: 15px">
+            <div class="col-sm-8">Tags:
+                {% for tag in question.tags %}
+                    <a href="{% url 'tag' tag_name=tag %}">{{ tag }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+

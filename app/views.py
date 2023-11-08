@@ -12,11 +12,11 @@ QUESTIONS = [
     } for i in range(10)
 ]
 
-for item in QUESTIONS:
-    if item['id'] % 2 == 0:
-        item['tags'].append('black-jack')
+for q in QUESTIONS:
+    if q['id'] % 2 == 0:
+        q['tags'].append('black-jack')
     else:
-        item['tags'].append('anime')
+        q['tags'].append('anime')
 
 ANSWERS = [
     {
@@ -26,9 +26,8 @@ ANSWERS = [
 ]
 
 
-def paginate(objects, page, per_page=5):
+def paginate(objects, page, per_page=10):
     paginator = Paginator(objects, per_page)
-
     return paginator.page(page)
 
 
@@ -45,6 +44,10 @@ def settings(request):
     return render(request, 'settings.html')
 
 
+def register(request):
+    return render(request, 'register.html')
+
+
 def hot(request):
     return render(request, 'hot.html', {'questions': paginate(QUESTIONS, 1)})
 
@@ -55,3 +58,12 @@ def ask(request):
 
 def login(request):
     return render(request, 'login.html')
+
+
+def tag(request, tag_name):
+    tag_questions = []
+    for Q in QUESTIONS:
+        if tag_name in Q['tags']:
+            tag_questions.append(Q)
+    return render(request, 'tag.html',
+                  {'questions': paginate(tag_questions, 1), 'tag': tag_name})
