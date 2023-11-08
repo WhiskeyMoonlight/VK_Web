@@ -8,7 +8,7 @@
         <div class="titles">New Questions
             <a href="{% url 'hot' %}" style="font-size: 15pt; padding-left: 15px;">Hot topics</a>
             <a role="button" class="btn btn-success"
-                    href="{% url 'ask' %}" style="margin-left: 20px">ASK!!</a>
+               href="{% url 'ask' %}" style="margin-left: 20px">ASK!!</a>
         </div>
     </div>
 
@@ -18,6 +18,8 @@
 
     {% endfor %}
 
-    {% include 'components/pagination_item.html' %}
+    <div class="container_pagination">
+        {% include 'components/pagination_item.html' %}
+    </div>
 
 {% endblock %}
