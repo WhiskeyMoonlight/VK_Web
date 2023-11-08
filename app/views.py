@@ -56,7 +56,8 @@ def register(request):
 
 
 def hot(request):
-    return render(request, 'hot.html', {'questions': paginate(QUESTIONS, 1)})
+    page = request.GET.get('page', 1)
+    return render(request, 'hot.html', {'questions': paginate(QUESTIONS, page)})
 
 
 def ask(request):
@@ -72,5 +73,6 @@ def tag(request, tag_name):
     for Q in QUESTIONS:
         if tag_name in Q['tags']:
             tag_questions.append(Q)
+    page = request.GET.get('page', 1)
     return render(request, 'tag.html',
-                  {'questions': paginate(tag_questions, 1), 'tag': tag_name})
+                  {'questions': paginate(tag_questions, page), 'tag': tag_name})
