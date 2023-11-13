@@ -91,20 +91,22 @@ main > .container {
 }
 
 .like-container {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .dislike-button,
 .like-button {
-  font-size: 24px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  padding: 0;
-  margin: 8px;
+    font-size: 24px;
+    width: 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 4px;
+    margin-right: 4px;
 }
 
 .like-count {
-  font-size: 18px;
+    font-size: 18px;
 }
