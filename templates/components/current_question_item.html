@@ -31,11 +31,16 @@
         </div>
 
         <div class="row-2" style="margin-top: 15px">
-            <div class="col-sm-8">Tags:
-                {% for tag in question.tags.all %}
-                    <a href="{% url 'tag' tag_name=tag %}">{{ tag }}</a>
-                {% endfor %}
-            </div>
+
+            {% if question.tags.all|length != 0 %}
+
+                <div class="col-sm-8">Tags:
+                    {% for tag in question.tags.all %}
+                        <a href="{% url 'tag' tag_name=tag %}">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+
+            {% endif %}
         </div>
     </div>
 </div>

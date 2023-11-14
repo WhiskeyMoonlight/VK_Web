@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from app.models import Question, Answer
+from app.models import Question, Answer, best_users
 
 # Create your views here.
 
@@ -20,7 +20,8 @@ def index(request):
     page = request.GET.get('page', 1)
     questions = Question.manager.new()
     context = {
-        'questions': paginate(questions, page)
+        'questions': paginate(questions, page),
+        'best_users': best_users(10)
     }
     return render(request, 'index.html', context)
 
@@ -30,34 +31,48 @@ def question(request, question_id):
     answers = Answer.manager.answers_of_question(question_id)
     context = {
         'question': item,
-        'answers': answers
+        'answers': answers,
+        'best_users': best_users(10)
     }
     return render(request, 'question.html', context)
 
 
 def settings(request):
-    return render(request, 'settings.html')
+    context = {
+        'best_users': best_users(10)
+    }
+    return render(request, 'settings.html', context)
 
 
 def register(request):
-    return render(request, 'register.html')
+    context = {
+        'best_users': best_users(10)
+    }
+    return render(request, 'register.html', context)
 
 
 def hot(request):
     page = request.GET.get('page', 1)
     questions = Question.manager.hot(3)
     context = {
-        'questions': paginate(questions, page)
+        'questions': paginate(questions, page),
+        'best_users': best_users(10)
     }
     return render(request, 'hot.html', context)
 
 
 def ask(request):
-    return render(request, 'ask.html')
+    context = {
+        'best_users': best_users(10)
+    }
+    return render(request, 'ask.html', context)
 
 
 def login(request):
-    return render(request, 'login.html')
+    context = {
+        'best_users': best_users(10)
+    }
+    return render(request, 'login.html', context)
 
 
 def tag(request, tag_name):
@@ -65,6 +80,7 @@ def tag(request, tag_name):
     page = request.GET.get('page', 1)
     context = {
         'questions': paginate(tag_questions, page),
-        'tag_name': tag_name
+        'tag_name': tag_name,
+        'best_users': best_users(10)
     }
     return render(request, 'tag.html', context)

@@ -5,12 +5,35 @@ from django.db.models import Sum
 
 # Create your models here.0
 
+def best_users(num):
+    users = User.objects.all()
+    best_users_list = []
+    for user in users:
+        rating = (Question.manager.get_all_likes(user.id)
+                  + Answer.manager.get_all_likes(user.id))
+        user_struct = {
+            'user': user.id,
+            'username': user.username,
+            'rating': rating
+        }
+        best_users_list.append(user_struct)
+    best_users_list.sort(key=lambda _dict: _dict['rating'])
+    return best_users_list[:num]
+
 
 class QuestionManager(models.Manager):
 
     @staticmethod
     def update():
         questions = Question.manager.all()
+        for q in questions:
+            q.answers = Answer.manager.answer_count(q.id)
+            q.likes = Like.manager.likes_of(q.id)
+            q.save()
+
+    @staticmethod
+    def update_user_questions(u_id):
+        questions = Question.manager.filter(user__id=u_id)
         for q in questions:
             q.answers = Answer.manager.answer_count(q.id)
             q.likes = Like.manager.likes_of(q.id)
@@ -33,12 +56,31 @@ class QuestionManager(models.Manager):
         Question.manager.update()
         return self.get(pk=q_id).tags.all()
 
+    def questions_of_user(self, u_id):
+        Question.manager.update_user_questions(u_id)
+        return self.filter(user__id=u_id).all()
+
+    @staticmethod
+    def get_all_likes(u_id):
+        questions = Question.manager.questions_of_user(u_id)
+        likes = questions.aggregate(Sum('likes')).get('likes__sum')
+        if likes:
+            return likes
+        return 0
+
 
 class AnswerManager(models.Manager):
 
     @staticmethod
     def update(q_id):
         answers = Answer.manager.filter(question__id=q_id).all()
+        for a in answers:
+            a.likes = AnswerLike.manager.likes_of(a.id)
+            a.save()
+
+    @staticmethod
+    def update_user_answers(u_id):
+        answers = Answer.manager.filter(user__id=u_id).all()
         for a in answers:
             a.likes = AnswerLike.manager.likes_of(a.id)
             a.save()
@@ -51,10 +93,14 @@ class AnswerManager(models.Manager):
     def answer_count(self, q_id):
         return self.select_related('question').filter(question__id=q_id).count()
 
+    def answers_of_user(self, u_id):
+        Answer.manager.update_user_answers(u_id)
+        return self.filter(user__id=u_id).all()
 
-class AnswerLikeManager(models.Manager):
-    def likes_of(self, item_id):
-        likes = self.filter(answer__id=item_id).aggregate(Sum('val')).get('val__sum')
+    @staticmethod
+    def get_all_likes(u_id):
+        answers = Answer.manager.answers_of_user(u_id)
+        likes = answers.aggregate(Sum('likes')).get('likes__sum')
         if likes:
             return likes
         return 0
@@ -63,6 +109,14 @@ class AnswerLikeManager(models.Manager):
 class QuestionLikeManager(models.Manager):
     def likes_of(self, item_id):
         likes = self.filter(question__id=item_id).aggregate(Sum('val')).get('val__sum')
+        if likes:
+            return likes
+        return 0
+
+
+class AnswerLikeManager(models.Manager):
+    def likes_of(self, item_id):
+        likes = self.filter(answer__id=item_id).aggregate(Sum('val')).get('val__sum')
         if likes:
             return likes
         return 0
