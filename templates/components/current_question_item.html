@@ -32,7 +32,11 @@
 
         <div class="row-2" style="margin-top: 15px">
 
-            {% if question.tags.all|length != 0 %}
+            {% if question.tags.all|length == 0 %}
+
+                Wow... No tags...
+
+            {% else %}
 
                 <div class="col-sm-8">Tags:
                     {% for tag in question.tags.all %}

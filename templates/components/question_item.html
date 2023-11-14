@@ -33,7 +33,11 @@
                 <div class="col-sm-4"><a href="{% url 'question' question_id=question.id %}">
                     answers ({{ question.answers }})</a></div>
 
-                {% if question.tags.all|length != 0 %}
+                {% if question.tags.all|length == 0 %}
+
+                    Wow... No tags...
+
+                {% else %}
 
                     <div class="col-sm-8">Tags:
                         {% for tag in question.tags.all %}

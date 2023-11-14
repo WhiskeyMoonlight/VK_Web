@@ -66,12 +66,24 @@
                 <div class="row tags-description">
                     <h1 style="margin-top: 20px;">Popular tags (Try press them, they work)</h1>
                     <div class="tags">
-                        <a role="button" class="btn btn-primary" href="{% url 'tag' tag_name='bender' %}">Bender</a>
-                        <a role="button" class="btn btn-secondary"
-                           href="{% url 'tag' tag_name='black-jack' %}">Black-Jack</a>
-                        <a role="button" class="btn btn-success" href="{% url 'tag' tag_name='anime' %}">Anime</a>
-                        <a role="button" class="btn btn-danger" href="{% url 'tag' tag_name='jojo' %}">Jojo</a>
-                        <a role="button" class="btn btn-warning" href="{% url 'tag' tag_name='shaman' %}">SHAMAN</a>
+                        {% for tag in tags %}
+                            {% if forloop.counter0 == 0 %}
+                                <a role="button" class="btn btn-primary"
+                                   href="{% url 'tag' tag_name=tag.title %}">{{ tag.title }}</a>
+                            {% elif forloop.counter0 == 1 %}
+                                <a role="button" class="btn btn-secondary"
+                                   href="{% url 'tag' tag_name=tag.title %}">{{ tag.title }}</a>
+                            {% elif forloop.counter0 == 2 %}
+                                <a role="button" class="btn btn-success"
+                                   href="{% url 'tag' tag_name=tag.title %}">{{ tag.title }}</a>
+                            {% elif forloop.counter0 == 3 %}
+                                <a role="button" class="btn btn-danger"
+                                   href="{% url 'tag' tag_name=tag.title %}">{{ tag.title }}</a>
+                            {% else %}
+                                <a role="button" class="btn btn-warning"
+                                   href="{% url 'tag' tag_name=tag.title %}">{{ tag.title }}</a>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                     <br/>
                     <h2 style="margin-top: 35px;">Best users</h2>
