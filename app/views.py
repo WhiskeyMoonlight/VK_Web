@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from app.models import Question, Answer, Tag, best_users
 
+
 # Create your views here.
 
 
@@ -92,3 +93,8 @@ def tag(request, tag_name):
         'tags': Tag.objects.all()[:5],
     }
     return render(request, 'tag.html', context)
+
+
+def handler404(request, exception):
+    context = {'page_title': '404'}
+    return render(request, '404.html', context)
