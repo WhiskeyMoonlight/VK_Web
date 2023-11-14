@@ -1,34 +1,71 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Sum
 
 
 # Create your models here.0
 
 
 class QuestionManager(models.Manager):
-    def hot_questions(self, num):
-        return self.order_by('-likes')[:num].values()
 
-    def new_questions(self, num):
-        return self.order_by('-id')[:num].values()
+    @staticmethod
+    def update():
+        questions = Question.manager.all()
+        for q in questions:
+            q.answers = Answer.manager.answer_count(q.id)
+            q.likes = Like.manager.likes_of(q.id)
+            q.save()
 
-    # def question_of_tag(self, tag_name):
-    #     tagged = []
-    #     for Q in QUESTIONS:
-    #         if tag_name in Q['tags']:
-    #             tag_questions.append(Q)
-    #     for question in self.values():
-    #         if tag_name in Tag.objects.all_tags():
-    #             Tag.objects.tag_id(tag_name)
-    #     return tagged
+    def hot(self, num):
+        Question.manager.update()
+        return self.order_by('-likes')[:num].all()
+
+    def new(self):
+        Question.manager.update()
+        return self.order_by('-id').all()
+
+    def question_of_tag(self, tag_name):
+        Question.manager.update()
+        questions = self.filter(tags__title=tag_name).all()
+        return questions
+
+    def tags_of_question(self, q_id):
+        Question.manager.update()
+        return self.get(pk=q_id).tags.all()
 
 
-class TagManager(models.Manager):
-    def all_tags(self):
-        return self.values()
+class AnswerManager(models.Manager):
 
-    def tag_id(self, tag_name):
-        return self.filter(tag_title=tag_name)[0].id
+    @staticmethod
+    def update(q_id):
+        answers = Answer.manager.filter(question__id=q_id).all()
+        for a in answers:
+            a.likes = AnswerLike.manager.likes_of(a.id)
+            a.save()
+
+    def answers_of_question(self, q_id):
+        Answer.manager.update(q_id)
+        answers = self.filter(question__id=q_id).all()
+        return answers
+
+    def answer_count(self, q_id):
+        return self.select_related('question').filter(question__id=q_id).count()
+
+
+class AnswerLikeManager(models.Manager):
+    def likes_of(self, item_id):
+        likes = self.filter(answer__id=item_id).aggregate(Sum('val')).get('val__sum')
+        if likes:
+            return likes
+        return 0
+
+
+class QuestionLikeManager(models.Manager):
+    def likes_of(self, item_id):
+        likes = self.filter(question__id=item_id).aggregate(Sum('val')).get('val__sum')
+        if likes:
+            return likes
+        return 0
 
 
 class Question(models.Model):
@@ -37,8 +74,9 @@ class Question(models.Model):
     tags = models.ManyToManyField('Tag', related_name='questions')
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     likes = models.IntegerField(default=0)
+    answers = models.IntegerField(default=0)
 
-    question_items = QuestionManager()
+    manager = QuestionManager()
 
     def __str__(self):
         return self.title
@@ -49,6 +87,9 @@ class Answer(models.Model):
     content = models.TextField()
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     is_correct = models.BooleanField()
+    likes = models.IntegerField(default=0)
+
+    manager = AnswerManager()
 
     def __str__(self):
         return f'Question {self.id}'
@@ -56,8 +97,6 @@ class Answer(models.Model):
 
 class Tag(models.Model):
     title = models.CharField(max_length=32)
-
-    objects = TagManager()
 
     def __str__(self):
         return f'{self.title}'
@@ -72,3 +111,13 @@ class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     question = models.ForeignKey('Question', on_delete=models.PROTECT)
     val = models.SmallIntegerField(default=0)
+
+    manager = QuestionLikeManager()
+
+
+class AnswerLike(models.Model):
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    answer = models.ForeignKey('Answer', on_delete=models.PROTECT)
+    val = models.SmallIntegerField(default=0)
+
+    manager = AnswerLikeManager()

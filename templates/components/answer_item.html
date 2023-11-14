@@ -7,10 +7,14 @@
             <a href="">user {{ answer.id }}</a>
         </div>
         <div class="row-3">
-            <div class="like-container">
-                <button class="like-button">+</button>
-                <span class="like-count">5</span>
-                <button class="dislike-button">-</button>
+            <div class="d-inline-flex" style="align-items: center;">
+                <button type="button" class="like-button btn btn-outline-primary"
+                        style="width: 25px; margin: 0;">+
+                </button>
+                <span class="like-count" style="margin: 3px;">{{ answer.likes }}</span>
+                <button type="button" class="like-button btn btn-outline-danger"
+                        style="width: 25px; margin: 0;">-
+                </button>
             </div>
         </div>
     </div>

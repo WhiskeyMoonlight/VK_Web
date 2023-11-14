@@ -1,29 +1,8 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from app.models import Question, Answer
 
 # Create your views here.
-
-QUESTIONS = [
-    {
-        'id': i,
-        'title': f'Question {i}',
-        'content': f'Long Lorem Ipsum {i}',
-        'tags': ['bender']
-    } for i in range(20)
-]
-
-for q in QUESTIONS:
-    if q['id'] % 2 == 0:
-        q['tags'].append('black-jack')
-    else:
-        q['tags'].append('anime')
-
-ANSWERS = [
-    {
-        'id': i,
-        'content': f'Long Lorem Ipsum answer {i}'
-    } for i in range(2)
-]
 
 
 def paginate(objects, page, per_page=5):
@@ -39,12 +18,21 @@ def paginate(objects, page, per_page=5):
 
 def index(request):
     page = request.GET.get('page', 1)
-    return render(request, 'index.html', {'questions': paginate(QUESTIONS, page)})
+    questions = Question.manager.new()
+    context = {
+        'questions': paginate(questions, page)
+    }
+    return render(request, 'index.html', context)
 
 
 def question(request, question_id):
-    item = QUESTIONS[question_id]
-    return render(request, 'question.html', {'question': item, 'answers': ANSWERS})
+    item = Question.manager.get(id=question_id)
+    answers = Answer.manager.answers_of_question(question_id)
+    context = {
+        'question': item,
+        'answers': answers
+    }
+    return render(request, 'question.html', context)
 
 
 def settings(request):
@@ -57,7 +45,11 @@ def register(request):
 
 def hot(request):
     page = request.GET.get('page', 1)
-    return render(request, 'hot.html', {'questions': paginate(QUESTIONS, page)})
+    questions = Question.manager.hot(3)
+    context = {
+        'questions': paginate(questions, page)
+    }
+    return render(request, 'hot.html', context)
 
 
 def ask(request):
@@ -69,10 +61,10 @@ def login(request):
 
 
 def tag(request, tag_name):
-    tag_questions = []
-    for Q in QUESTIONS:
-        if tag_name in Q['tags']:
-            tag_questions.append(Q)
+    tag_questions = list(Question.manager.question_of_tag(tag_name))
     page = request.GET.get('page', 1)
-    return render(request, 'tag.html',
-                  {'questions': paginate(tag_questions, page), 'tag': tag_name})
+    context = {
+        'questions': paginate(tag_questions, page),
+        'tag_name': tag_name
+    }
+    return render(request, 'tag.html', context)
