@@ -8,7 +8,7 @@ QUESTIONS = [
         'id': i,
         'title': f'Question {i}',
         'content': f'Long Lorem Ipsum {i}',
-        'tags': ['bender']
+        'tags': ['bender'],
     } for i in range(20)
 ]
 
@@ -21,7 +21,7 @@ for q in QUESTIONS:
 ANSWERS = [
     {
         'id': i,
-        'content': f'Long Lorem Ipsum answer {i}'
+        'content': f'Long Lorem Ipsum answer {i}',
     } for i in range(2)
 ]
 
