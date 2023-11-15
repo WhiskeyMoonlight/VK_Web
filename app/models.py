@@ -5,7 +5,7 @@ from django.db.models import Sum, Count
 
 # Create your models here.0
 
-def best_users(num):
+def best_users():
     users = User.objects.all()
     best_users_list = []
     for user in users:
@@ -18,7 +18,7 @@ def best_users(num):
         }
         best_users_list.append(user_struct)
     best_users_list.sort(key=lambda _dict: _dict['rating'])
-    return best_users_list[:num]
+    return best_users_list[:5]
 
 
 class QuestionManager(models.Manager):
@@ -39,12 +39,12 @@ class QuestionManager(models.Manager):
             q.likes = Like.manager.likes_of(q.id)
             q.save()
 
-    def hot(self, num):
-        Question.manager.update()
-        return self.order_by('-likes')[:num].all()
+    def hot(self):
+        # Question.manager.update()
+        return self.order_by('-likes').all()
 
     def new(self):
-        Question.manager.update()
+        # Question.manager.update()
         return self.order_by('-id').all()
 
     def question_of_tag(self, tag_name):
@@ -124,8 +124,8 @@ class AnswerLikeManager(models.Manager):
 
 class TagManager(models.Manager):
 
-    def popular_tags(self, num):
-        return self.annotate(num_questions=Count('questions')).order_by('-num_questions')[:num]
+    def popular_tags(self):
+        return self.annotate(num_questions=Count('questions')).order_by('-num_questions')[:5]
 
 
 class Question(models.Model):
@@ -148,6 +148,9 @@ class Answer(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     is_correct = models.BooleanField()
     likes = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['-id']
 
     manager = AnswerManager()
 

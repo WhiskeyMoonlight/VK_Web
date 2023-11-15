@@ -6,11 +6,17 @@
 
     <hr>
 
-    {% for answer in answers %}
+    {% for answer in items %}
 
         {% include 'components/answer_item.html' %}
 
     {% endfor %}
+
+    <div class="container_pagination">
+
+        {% include 'components/pagination_item.html' %}
+
+    </div>
 
     {% if answers|length == 0 %}
 

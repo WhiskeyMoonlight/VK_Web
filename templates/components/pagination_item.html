@@ -1,11 +1,11 @@
 {% load static %}
 
 <nav aria-label="Page navigation example">
-    {% if questions.has_other_pages %}
+    {% if items.has_other_pages %}
         <ul class="pagination">
-            {% if questions.has_previous %}
+            {% if items.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ questions.previous_page_number }}" aria-label="Previous">
+                    <a class="page-link" href="?page={{ items.previous_page_number }}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span></a>
                 </li>
             {% else %}
@@ -15,17 +15,17 @@
                 </li>
             {% endif %}
 
-            {% for curr_page in questions.paginator.page_range %}
-                {% if questions.number == curr_page %}
+            {% for curr_page in items.paginator.page_range %}
+                {% if items.number == curr_page %}
                     <li class="page-item"><a class="page-link" href="#">{{ curr_page }}</a></li>
                 {% else %}
                     <li class="page-item"><a class="page-link" href="?page={{ curr_page }}">{{ curr_page }}</a></li>
                 {% endif %}
             {% endfor %}
 
-            {% if questions.has_next %}
+            {% if items.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ questions.next_page_number }}" aria-label="Next">
+                    <a class="page-link" href="?page={{ items.next_page_number }}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span></a>
                 </li>
             {% else %}

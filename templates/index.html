@@ -10,14 +10,16 @@
         </div>
     </div>
 
-    {% for question in questions %}
+    {% for question in items %}
 
         {% include 'components/question_item.html' %}
 
     {% endfor %}
 
     <div class="container_pagination">
+
         {% include 'components/pagination_item.html' %}
+
     </div>
 
 {% endblock %}
