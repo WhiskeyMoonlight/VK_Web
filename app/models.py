@@ -172,7 +172,15 @@ class Profile(models.Model):
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     question = models.ForeignKey('Question', on_delete=models.PROTECT)
-    val = models.SmallIntegerField(default=0)
+    CHOICES = (
+        ('l', 1),
+        ('n', 0),
+        ('d', -1)
+    )
+    val = models.SmallIntegerField(default=0, choices=CHOICES)
+
+    class Meta:
+        unique_together = [['user', 'question']]
 
     manager = QuestionLikeManager()
 
@@ -180,6 +188,14 @@ class Like(models.Model):
 class AnswerLike(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     answer = models.ForeignKey('Answer', on_delete=models.PROTECT)
-    val = models.SmallIntegerField(default=0)
+    CHOICES = (
+        ('l', 1),
+        ('n', 0),
+        ('d', -1)
+    )
+    val = models.SmallIntegerField(default=0, choices=CHOICES)
+
+    class Meta:
+        unique_together = [['user', 'answer']]
 
     manager = AnswerLikeManager()
