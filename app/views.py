@@ -23,7 +23,7 @@ def index(request):
     context = {
         'questions': paginate(questions, page),
         'best_users': best_users(10),
-        'tags': Tag.objects.all()[:5],
+        'tags': Tag.manager.popular_tags(5),
     }
     return render(request, 'index.html', context)
 
@@ -35,7 +35,7 @@ def question(request, question_id):
         'question': item,
         'answers': answers,
         'best_users': best_users(10),
-        'tags': Tag.objects.all()[:5],
+        'tags': Tag.manager.popular_tags(5),
     }
     return render(request, 'question.html', context)
 
@@ -43,7 +43,7 @@ def question(request, question_id):
 def settings(request):
     context = {
         'best_users': best_users(10),
-        'tags': Tag.objects.all()[:5],
+        'tags': Tag.manager.popular_tags(5),
     }
     return render(request, 'settings.html', context)
 
@@ -51,7 +51,7 @@ def settings(request):
 def register(request):
     context = {
         'best_users': best_users(10),
-        'tags': Tag.objects.all()[:5],
+        'tags': Tag.manager.popular_tags(5),
     }
     return render(request, 'register.html', context)
 
@@ -62,7 +62,7 @@ def hot(request):
     context = {
         'questions': paginate(questions, page),
         'best_users': best_users(10),
-        'tags': Tag.objects.all()[:5],
+        'tags': Tag.manager.popular_tags(5),
     }
     return render(request, 'hot.html', context)
 
@@ -70,7 +70,7 @@ def hot(request):
 def ask(request):
     context = {
         'best_users': best_users(10),
-        'tags': Tag.objects.all()[:5],
+        'tags': Tag.manager.popular_tags(5),
     }
     return render(request, 'ask.html', context)
 
@@ -78,7 +78,7 @@ def ask(request):
 def login(request):
     context = {
         'best_users': best_users(10),
-        'tags': Tag.objects.all()[:5],
+        'tags': Tag.manager.popular_tags(5),
     }
     return render(request, 'login.html', context)
 
@@ -90,7 +90,7 @@ def tag(request, tag_name):
         'questions': paginate(tag_questions, page),
         'tag_name': tag_name,
         'best_users': best_users(10),
-        'tags': Tag.objects.all()[:5],
+        'tags': Tag.manager.popular_tags(5),
     }
     return render(request, 'tag.html', context)
 

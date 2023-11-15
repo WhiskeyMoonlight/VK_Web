@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models import Sum
+from django.db.models import Sum, Count
 
 
 # Create your models here.0
@@ -122,6 +122,12 @@ class AnswerLikeManager(models.Manager):
         return 0
 
 
+class TagManager(models.Manager):
+
+    def popular_tags(self, num):
+        return self.annotate(num_questions=Count('questions')).order_by('-num_questions')[:num]
+
+
 class Question(models.Model):
     title = models.CharField(max_length=64)
     content = models.TextField()
@@ -151,6 +157,8 @@ class Answer(models.Model):
 
 class Tag(models.Model):
     title = models.CharField(max_length=32)
+
+    manager = TagManager()
 
     def __str__(self):
         return f'{self.title}'
