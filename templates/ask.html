@@ -5,21 +5,24 @@
     <div class="row title">
         <h2>New Question</h2>
     </div>
-    <div class="mb-3">
-        <label for="questionTitle" class="form-label">Title</label>
-        <input type="text" class="form-control" id="questionTitle"
-               placeholder="Title...">
-    </div>
-    <div class="mb-3">
-        <label for="questionText" class="form-label">Text</label>
-        <textarea class="form-control" id="questionText" rows="8" placeholder="Type here..."></textarea>
-    </div>
-    <div class="mb-3">
-        <label for="questionTitle" class="form-label">Tags</label>
-        <input type="text" class="form-control" id="questionTitle"
-               placeholder="Tags...">
-    </div>
+    <form>
+        <div class="mb-3">
+            <label for="questionTitle" class="form-label">Title</label>
+            <input type="text" class="form-control" id="questionTitle"
+                   placeholder="Title..." required>
+        </div>
+        <div class="mb-3">
+            <label for="questionText" class="form-label">Text</label>
+            <textarea class="form-control" id="questionText" rows="8" placeholder="Type here..." required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="questionTitle" class="form-label">Tags</label>
+            <input type="text" class="form-control" id="questionTitle"
+                   placeholder="Tags..." required>
+        </div>
 
-    <button type="submit" class="btn btn-primary mb-3">Submit</button>
+        <button type="submit" class="btn btn-primary mb-3">Submit</button>
+    </form>
+
 
 {% endblock %}

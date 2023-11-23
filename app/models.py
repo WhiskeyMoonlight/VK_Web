@@ -23,32 +23,13 @@ def best_users():
 
 class QuestionManager(models.Manager):
 
-    @staticmethod
-    def update():
-        questions = Question.manager.all()
-        for q in questions:
-            q.answers = Answer.manager.answer_count(q.id)
-            q.likes = Like.manager.likes_of(q.id)
-            q.save()
-
-    @staticmethod
-    def update_user_questions(u_id):
-        questions = Question.manager.filter(user__id=u_id)
-        for q in questions:
-            q.answers = Answer.manager.answer_count(q.id)
-            q.likes = Like.manager.likes_of(q.id)
-            q.save()
-
     def hot(self):
-        # Question.manager.update()
         return self.order_by('-likes').all()
 
     def new(self):
-        # Question.manager.update()
         return self.order_by('-id').all()
 
     def question_of_tag(self, tag_name):
-        Question.manager.update()
         questions = self.filter(tags__title=tag_name).all()
         return questions
 
@@ -57,7 +38,6 @@ class QuestionManager(models.Manager):
         return self.get(pk=q_id).tags.all()
 
     def questions_of_user(self, u_id):
-        Question.manager.update_user_questions(u_id)
         return self.filter(user__id=u_id).all()
 
     @staticmethod
@@ -71,22 +51,7 @@ class QuestionManager(models.Manager):
 
 class AnswerManager(models.Manager):
 
-    @staticmethod
-    def update(q_id):
-        answers = Answer.manager.filter(question__id=q_id).all()
-        for a in answers:
-            a.likes = AnswerLike.manager.likes_of(a.id)
-            a.save()
-
-    @staticmethod
-    def update_user_answers(u_id):
-        answers = Answer.manager.filter(user__id=u_id).all()
-        for a in answers:
-            a.likes = AnswerLike.manager.likes_of(a.id)
-            a.save()
-
     def answers_of_question(self, q_id):
-        Answer.manager.update(q_id)
         answers = self.filter(question__id=q_id).all()
         return answers
 
@@ -94,7 +59,6 @@ class AnswerManager(models.Manager):
         return self.select_related('question').filter(question__id=q_id).count()
 
     def answers_of_user(self, u_id):
-        Answer.manager.update_user_answers(u_id)
         return self.filter(user__id=u_id).all()
 
     @staticmethod
