@@ -34,7 +34,6 @@ class QuestionManager(models.Manager):
         return questions
 
     def tags_of_question(self, q_id):
-        Question.manager.update()
         return self.get(pk=q_id).tags.all()
 
     def questions_of_user(self, u_id):
